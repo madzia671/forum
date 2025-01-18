@@ -1,0 +1,45 @@
+form{
+    flex-direction: column;
+    display: flex;
+    text-align:center;
+    padding-left: 300px;
+    padding-right: 300px;
+    background-color: blue;
+}
+
+input,textarea{
+    padding: 10px;
+    border-radius: 5px;
+    margin: 10px;
+    text-align  : center;
+    background-color: chartreuse;
+}
+
+label{
+    
+}
+
+.dod{
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.dod:hover{
+    background-color: red;
+    color: white;
+}
+
+
+.wyw{
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.wyw:hover{
+    background-color: red;
+    color: white;
+}
+
+div{
+    justify-content: center;
+}
