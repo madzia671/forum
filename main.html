@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Strona z Forum</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://www.google.com/recaptcha/enterprise.js?render=6LedrLsqAAAAALrmqr-se8iWDJ60gxFpTvk8Egbr"></script>
+</head>
+<body>
+    <header>
+        <h1>Strona z Forum</h1>
+        <p>Witamy na naszej stronie!</p>
+    </header>
+    <nav>
+        <a href="#home">Strona Główna</a>
+        <a href="#forum">Forum</a>
+        <a href="#about">O Nas</a>
+        <a href="#try">Wypróbuj</a>
+    </nav>
+    <main>
+        <section id="home">
+            <h2>Strona Główna</h2>
+            <p>Nasza strona umożliwia wyszukiwanie opinii i komentarzy, a także dodawanie własnych po weryfikacji CAPTCHA.</p>
+        </section>
+        <section id="forum">
+            <h2>Forum</h2>
+            <div>
+                <input type="text" id="search" placeholder="Wpisz nazwę strony do wyszukania">
+                <button onclick="searchComments()">Szukaj</button>
+            </div>
+            <div class="comments" id="comments">
+                <h3>Komentarze</h3>
+                <p id="no-comments">Brak komentarzy dla tej strony.</p>
+            </div>
+            <form id="comment-form" onsubmit="submitCommentWithCaptcha(event)">
+                <div>
+                    <input type="text" id="page-name" placeholder="Nazwa strony" required>
+                </div>
+                <div>
+                    <textarea id="message" placeholder="Twoja wiadomość" required></textarea>
+                </div>
+                <button type="submit">Dodaj komentarz</button>
+            </form>
+        </section>
+        <section id="about">
+            <h2>O Nas</h2>
+            <p>Jesteśmy zespołem pasjonatów technologii, którzy stworzyli tę stronę, aby dzielić się opiniami i informacjami.</p>
+        </section>
+        <section id="try">
+            <h2>Wypróbuj</h2>
+            <p>Skorzystaj z naszej wtyczki, aby jeszcze łatwiej korzystać z funkcji strony.</p>
+            <button>Pobierz wtyczkę</button>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2025 Strona z Forum. Wszelkie prawa zastrzeżone.</p>
+    </footer>
+    <script src="script.js"></script>
+</body>
+</html>
