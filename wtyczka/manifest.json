@@ -1,0 +1,23 @@
+
+{
+  "manifest_version": 3,
+  "name": "Cerbersecurity",
+  "version": "1.0",
+  "description": "Chronimy Ciebie jak Cerber pilnował Hadesu! ",
+  "icons": {
+    "48": "src/logo.png"
+  },
+
+  "permissions": [
+        "storage",
+        "activeTab"
+    ],
+    "background": {
+      "service_worker": "background.js"
+    },
+    "action": {
+      "default_popup": "popup.html",
+      "default_icon": "src/logo.png"
+    }
+  }
+  
