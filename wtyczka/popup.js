@@ -59,7 +59,7 @@ chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
     } 
     else {
         modeImage.src = 'src/dark.png'; // Obrazek dla jasnego motywu
-    }
+    } 
     });
 
     // Funkcja do powiększania

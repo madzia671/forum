@@ -75,31 +75,41 @@ const banksWhiteList = [
 
 ];
 
-const BlackListCert = ["https://vlogdynia.pl/"];
-/*
-// Funkcja do dodawania rekordów do czarnej listy
-function addRecordsToDatabase(records) {
-  // Dodaj każdy rekord do czarnej listy 
-  records.forEach(singleRecord => {
-    // Sprawdź, czy rekord nie jest pusty
-    if (singleRecord.trim()) {
-      BlackListCert.push(singleRecord.trim());
+
+
+// URL do pliku .txt
+//const CERT = 'https://hole.cert.pl/domains/v2/domains.txt';
+const BlackListCert = ["https://www.vlogdynia.pl/"];
+
+// Funkcja do pobrania i przetworzenia pliku
+async function fetchBlackList() {
+    try {
+        // Pobierz plik
+        const response = await fetch('domains.txt');
+        
+        // Sprawdź, czy odpowiedź jest poprawna
+        if (!response.ok) {
+            throw new Error('Black list is not available now.');
+        }
+
+        // Przeczytaj tekst z odpowiedzi
+        const text = await response.text();
+
+        // Podziel tekst na wiersze
+        const lines = text.split('\n');
+
+        // Dodaj każdy wiersz do listy
+        lines.forEach(line => {
+            if (line.trim()) { // Sprawdź, czy wiersz nie jest pusty
+                BlackListCert.push(line.trim());
+            }
+        });
+    } catch (error) {
+        console.error('ERROR:', error);
     }
-  });
 }
 
-//dodawanie nowej bazy danych z czarną listą linków CERT-U
-const axios = require('axios');
 
-axios.get('https://hole.cert.pl/domains/v2/domains.txt')
-  .then(response => {
-    const records = response.data.split('\n'); // Zakładając, że rekordy są oddzielone nową linią
-    // Dodaj rekordy do bazy danych
-    addRecordsToDatabase(records);
-  })
-  .catch(error => console.error('Błąd:', error));
-
-*/
   function checkUrl(url) {
     // Sprawdzenie, czy URL zaczyna się od któregoś z adresów bazowych
     const existsOnWhiteList = banksWhiteList.some(link=> url.startsWith(link));
@@ -124,7 +134,10 @@ axios.get('https://hole.cert.pl/domains/v2/domains.txt')
       sendResponse({ result });
     }
   });
-  
+
+chrome.runtime.onInstalled.addListener(() => {
+  fetchBlackList();
+});
 
 /*nie działa zmuszanie do atumateyzneog otwierania
 chrome.runtime.onStartup.addListener(() => {
