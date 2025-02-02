@@ -117,12 +117,15 @@ async function fetchBlackList() {
     //const existsOnBlackList = BlackListCert.includes(url);
     const existsOnBlackList = BlackListCert.some(link=> url.includes(link));
     if(existsOnBlackList == true){
+      chrome.action.setIcon({ path: "src/blackLOGO.png" });
       return "blackList"; // istnieje na czarnej liście
     }
     else if(existsOnWhiteList == true) {
+      chrome.action.setIcon({ path: "src/whiteLOGO.png" });
       return "whiteList"; // istnieje na białej liście
     }
     else{
+      chrome.action.setIcon({ path: "src/logo.png" });
       return "undefinedList"; // nie znana jest autentyczność strony
     }
   }
@@ -139,10 +142,17 @@ chrome.runtime.onInstalled.addListener(() => {
   fetchBlackList();
 });
 
-/*nie działa zmuszanie do atumateyzneog otwierania
+
+// Nasłuchiwanie na zmiany w zakładkach
+chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
+  if (changeInfo.status === 'complete' && tab.url) {
+      checkUrl(tab.url); // Automatyczne sprawdzanie URL po załadowaniu strony
+  }
+});
+/*
 chrome.runtime.onStartup.addListener(() => {
   chrome.action.openPopup();
 });
-
 */
+
 

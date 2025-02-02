@@ -1,60 +1,44 @@
-// nie ma localStorage póki co, plus certyfikat strony forum coś nie działa
-// co z językiem podczas pobierania wtyczki - czyli opis w json?
-
-/*
-// Pobieranie adresu URL aktualnej karty
-chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
-    const currentUrl = tabs[0].url;
-
-    // Wysyłanie wiadomości do background.js
-    chrome.runtime.sendMessage({ action: "checkUrl", url: currentUrl }, (response) => {
-        const resultDiv = document.getElementById("result");
-        console.log("Otrzymano odpowiedź:", response);
-        if (response.result == "whiteList") {
-            resultDiv.textContent = "Strona zweryfikowana, nadal zachowaj środki ostrożności.";
-            resultDiv.style.color = "green";
-        }
-        else if (response.result == "blackList"){
-            resultDiv.textContent = "Strona niebezpieczna, natychmiast ją opuść.";
-            resultDiv.style.color = "red";
-        }
-        else {
-            resultDiv.textContent = "Strona niezweryfikowana, uważaj.";
-            resultDiv.style.color = "yellow";
-        }
-    });
-});
-    /*
-    checkForumButton.addEventListener('click', () => {
-        const forumUrl = 'https://twoja-strona-z-forum.com';
-        window.open(`${forumUrl}?search=${currentUrl}`, '_blank');
-    });
-    */
-
-
-    
 
     const modeImage = document.getElementById('mode-change');
     const zoomPage = document.getElementById('zoom-in');
     const reducePage = document.getElementById('reduce');
+    const resetPage = document.getElementById('resetZoom');
     const changeLanguage = document.getElementById('lang-change');
     const goToForum =  document.getElementById('check-forum');
 
     let currentLanguage = 'pl';
     let zoomLevel = 1; // Poziom powiększenia
+    const maxZoomLevel = 2; // maksymalny poziom powiększenia
+    const minZoomLevel = 0.5; // mminimalny poziom zmniejszenia
 
-    //ustawienia lub w html po prostu umieścić
+    /*ustawienia lub w html po prostu umieścić
     document.getElementById("settings-change").onclick = function() {
         localStorage.setItem('pl', currentLanguage); //do zmiany
         window.location.href = "ustawienia.html";
-
     }
-
+*/
     //zmiana motywu po kliknięciu w obrazek
     modeImage.addEventListener('click', () => {
-        document.body.classList.toggle('dark-mode');
+        if (document.body.classList.contains('dangerous-body')) {
+            document.body.classList.remove('dangerous-body');
+            document.body.classList.toggle('dangerous-dark-mode');
+        } else if (document.body.classList.contains('dangerous-dark-mode')) {
+            document.body.classList.remove('dangerous-dark-mode');
+            document.body.classList.add('dangerous-body');
+        } 
+        else if (document.body.classList.contains('good-body')) {
+            document.body.classList.remove('good-body');
+            document.body.classList.add('good-body-mode');
+        }
+        else if(document.body.classList.contains('good-body-mode')){
+            document.body.classList.remove('good-body-mode');
+            document.body.classList.add('good-body');
+        }
+        else{
+            document.body.classList.toggle('dark-mode');
+        }
     // Zmiana  obrazka w zależności od motywu
-    if (document.body.classList.contains('dark-mode')) {
+    if ((document.body.classList.contains('dark-mode')) || (document.body.classList.contains('dangerous-dark-mode')) || (document.body.classList.contains('good-body-mode'))) {
         modeImage.src = 'src/light.png'; // Obrazek dla ciemnego motywu
     } 
     else {
@@ -64,16 +48,45 @@ chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
 
     // Funkcja do powiększania
     zoomPage.addEventListener('click', () => {
-        zoomLevel += 0.1; // Zwiększ poziom powiększenia
-        document.body.style.transform = `scale(${zoomLevel})`; // Powiększ zawartość
-        document.body.style.transformOrigin = '0 0'; // Ustaw punkt odniesienia
+        if(zoomLevel < maxZoomLevel)
+        {
+            zoomLevel += 0.1; // Zwiększ poziom powiększenia
+            document.body.style.zoom = zoomLevel; // Powiększ zawartość
+        }
+        else
+        {
+            if(currentLanguage == "pl"){
+                alert("Osiągnięto maksymalne powiększenie.")
+            }
+            else{
+                alert("Maximum zoom has been reached.")
+            }
+        }
     });
 
     // Funkcja do zmniejszenia
-        reducePage.addEventListener('click', () => {
-        zoomLevel -= 0.1; // Zwiększ poziom powiększenia
-        document.body.style.transform = `scale(${zoomLevel})`; // Powiększ zawartość
-        document.body.style.transformOrigin = '0 0'; // Ustaw punkt odniesienia
+    reducePage.addEventListener('click', () => {
+        if(zoomLevel > minZoomLevel)
+        {
+            zoomLevel -= 0.1; // Zwiększ poziom powiększenia
+            document.body.style.zoom = zoomLevel; // Powiększ zawartość
+        }
+        else
+        {
+            if(currentLanguage == "pl"){
+                alert("Osiągnięto minimalne pomniejszenie.")
+            }
+            else{
+                alert("Minimum zoom has been reached.")
+            }
+        }
+       
+    });
+
+    //Funkcja do przywrócenia zoomu
+    resetPage.addEventListener('click', () => {
+        zoomLevel = 1; // Zwiększ poziom powiększenia
+        document.body.style.zoom = zoomLevel; // Powiększ zawartość
     });
 
     // Funcja zmiany języka na angielski
@@ -112,9 +125,10 @@ chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
 
 //WTYCZKA
 
-// Pobieranie adresu URL aktualnej karty
-chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
-const currentUrl = tabs[0].url;
+document.addEventListener('DOMContentLoaded', () => {
+    // Pobieranie adresu URL aktualnej karty
+    chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
+        const currentUrl = tabs[0].url;
 
 // Wysyłanie wiadomości do background.js
 chrome.runtime.sendMessage({ action: "checkUrl", url: currentUrl }, (response) => {
@@ -124,35 +138,33 @@ chrome.runtime.sendMessage({ action: "checkUrl", url: currentUrl }, (response) =
     {
         if (response.result == "whiteList") {
             resultDiv.textContent = "Strona zweryfikowana, nadal zachowaj środki ostrożności.";
-            resultDiv.style.color = "green";
+            document.body.classList.toggle('good-body');
         }
         else if (response.result == "blackList"){
             document.body.classList.toggle('dangerous-body');
             resultDiv.textContent = "Strona niebezpieczna, natychmiast ją opuść.";
-            //resultDiv.style.color = "red";
-            
         }
         else {
             resultDiv.textContent = "Strona niezweryfikowana, uważaj.";
-            resultDiv.style.color = "yellow";
+            resultDiv.style.color = "grey";
         }
     }
     else
     {
         if (response.result == "whiteList") {
             resultDiv.textContent = "The website has been verified, still be careful.";
-            resultDiv.style.color = "green";
+            document.body.classList.toggle('good-body');
         }
         else if (response.result == "blackList"){
             resultDiv.textContent = "Dangerous website, leave it immediately.";
-            resultDiv.style.color = "red";
             document.body.classList.toggle('dangerous-body');
         }
         else {
             resultDiv.textContent = "Unverified site, be careful.";
-            resultDiv.style.color = "yellow";
+            resultDiv.style.color = "grey";
         }
     }
+});
 });
 });
 

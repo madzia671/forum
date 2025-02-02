@@ -1,21 +1,56 @@
 body {
     display: flex;
     justify-content: center;
-    font-family: Arial, sans-serif; 
+    font-family: Georgia, sans-serif; 
     margin: 0;
     padding: 0;
-    background-color: #f9f9f900;
+    background-color: white;
     color: black; 
     transition: background-color 0.3s, color 0.3s;
-    width: 400px; /* Zwiększ szerokość */
-    min-width: 200px; /* Możesz to zostawić */
+    width: 400px; 
+    min-width: 200px; 
+    height: auto;
+    min-height: 200px; 
+    overflow: auto; /* Umożliwia przewijanie */
+    border: 2px solid black;
+    font-size: 16px;
+    /*border-radius: 15px;*/
+}
+
+.good-body {
+    display: flex;
+    justify-content: center;
+    font-family: Georgia, sans-serif; 
+    margin: 0;
+    padding: 0;
+    background-color: #b4ecba;
+    color: black; 
+    transition: background-color 0.3s, color 0.3s;
+    width: 400px; 
+    min-width: 200px; 
+    height: auto;
+    min-height: 200px; 
+    overflow: auto; /* Umożliwia przewijanie */
+    border: 2px solid black;
+    /*border-radius: 15px;*/
+}
+
+.dangerous-body
+{
+    display: flex;
+    justify-content: center;
+    font-family: Arial, sans-serif; 
+    font-size: 26px;
+    margin: 0;
+    padding: 0;
+    background-color: #b05d5d;
+    color: rgb(255, 225, 0); 
+    width: 600px; /* Zwiększ szerokość */
+    min-width: 400px; /* Możesz to zostawić */
     height: auto; /* Ustaw na auto */
     min-height: 200px; /* Ustaw minimalną wysokość */
     overflow: auto; /* Umożliwia przewijanie */
-    border: 2px solid black;
-    border-radius: 15px;
 }
-
 .container {
     display: flex;
     flex-direction: column;
@@ -24,35 +59,50 @@ body {
     justify-content: center;
 }
 
-a {
-    color:#7fffd4; 
-}
-
 #project-name{
-    padding: 5px;
-    font-size: 16px;
+    padding: 3px;
+    font-size: 18px;
 }
 
 .dark-mode {
     background-color: #121212;
     color: #ffffff;
 }
-    
-.dark-mode a {
-    color: #bb86fc;
-}
 
-.dangerous-body
-{
-    background-color: #b05d5d;
+.dangerous-dark-mode{
+    display: flex;
+    justify-content: center;
+    font-family: Arial, sans-serif; 
+    font-size: 26px;
+    margin: 0;
+    padding: 0;
+    background-color: #4a1e1e;
+    color: rgb(255, 238, 0); 
     width: 600px; /* Zwiększ szerokość */
     min-width: 400px; /* Możesz to zostawić */
     height: auto; /* Ustaw na auto */
     min-height: 200px; /* Ustaw minimalną wysokość */
     overflow: auto; /* Umożliwia przewijanie */
-    font-size: 24px;
-    margin: auto;
 }
+
+.good-body-mode{
+    display: flex;
+    justify-content: center;
+    font-family: Georgia, sans-serif; 
+    margin: 0;
+    padding: 0;
+    background-color: #053d0f;
+    color: rgb(207, 194, 194); 
+    transition: background-color 0.3s, color 0.3s;
+    width: 400px; 
+    min-width: 200px; 
+    height: auto;
+    min-height: 200px; 
+    overflow: auto; /* Umożliwia przewijanie */
+    border: 2px solid black;
+    /*border-radius: 15px;*/
+}
+
 
 .maintext {
     display: inline-flex;
@@ -61,18 +111,18 @@ a {
 
 img
 {
-    width: 30px;
+    width: 32px;
 }
 
 .box {
     margin: 5px; /* Dodanie marginesu dla lepszego wyglądu */
 }
    
-#zoom-in, #reduce {
-    background-color: lightblue; /* Ustawia kolor tła */
-    color: darkblue; /* Ustawia kolor tekstu */
+#zoom-in, #reduce, #resetZoom {
+    background-color: rgb(197, 173, 230); /* Ustawia kolor tła */
+    color: rgb(65, 0, 139); /* Ustawia kolor tekstu */
     padding: 2px; /* Dodaje wewnętrzny odstęp */
-    border: 2px solid darkblue; /* Dodaje ramkę */
+    border: 2px solid rgb(65, 0, 139); /* Dodaje ramkę */
     border-radius: 5px; /* Zaokrągla rogi */
     width: 20px;
     height: 20px;
@@ -86,15 +136,28 @@ img
 }
 
 .mainbox {
-    padding: 10px;
+    padding-bottom: 6px;
+    align-items: center;
+    text-align: center;
+    font-family: Arial, sans-serif; 
+   /* font-size: 16px;*/
+}
+
+.forumbox {
+    padding-bottom: 0px;
+    padding-top: 15px;
     align-items: center;
     text-align: center;
 }
 
-.forumbox {
-    padding-top: 10px;
-    align-items: center;
-    text-align: center;
+#check-forum
+{
+    background-color: #bb86fc;
+    font-family: Arial, sans-serif; 
+    font-weight: bold;
+    color: black; 
+    border: 1px solid black;
+    border-radius: 3px;
 }
 /*
 body {

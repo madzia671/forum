@@ -10,7 +10,8 @@
 
   "permissions": [
         "storage",
-        "activeTab"
+        "activeTab",
+        "tabs"
     ],
     "background": {
       "service_worker": "background.js"
@@ -19,5 +20,7 @@
       "default_popup": "popup.html",
       "default_icon": "src/logo.png"
     }
+    
+    
   }
   
