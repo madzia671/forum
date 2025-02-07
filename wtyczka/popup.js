@@ -53,20 +53,42 @@
 ///////////////FUNKCJE DODATKOWE///////////////
 
     function changingMode() { //zamiana motywu
+        chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
+        const currentUrl = tabs[0].url;
+        chrome.runtime.sendMessage({ action: "checkUrl", url: currentUrl }, (response) => {
+        const resultDiv = document.getElementById("result");
 
         if (whichMode=='light'){
             modeImage.src = 'src/dark.png'; 
             whichMode = 'dark';
-            main();
-        }
+            //main();
+            if (response.result == "whiteList") {
+                document.body.classList.add('good-body-mode');
+            }
+            else if (response.result == "blackList") {
+                document.body.classList.add('dangerous-dark-mode');
+                
+            }
+            else if (response.result == "undefinedList") {
+                document.body.classList.add('dark-mode');
+        }}
+
         else {
             modeImage.src = 'src/light.png'; 
             whichMode = 'light';
-            main();
-        } 
+            //main();
+            if (response.result == "whiteList") {
+                document.body.classList.add('good-body');
+            }
+            else if (response.result == "blackList") {
+                document.body.classList.add('dangerous-body');
+            }
+            else if (response.result == "undefinedList") {
+                resultDiv.style.color = "grey";
+        }} 
 
         saveSettings();
-    }
+    });});}
 
     //powiększenie
     function changingZoomPlus(){

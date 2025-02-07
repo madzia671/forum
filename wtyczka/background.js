@@ -1,7 +1,4 @@
-/*
-czarna lista nie działa dlatego zakometerowane + chciałam sprawdzić czy działa zmienianie rozmiaru, dlatego znajduje się tam witryna vlo
-nie działa wyświetlanie okna po prostu, chciałam by się wyświetało tylko, gdy jest niezabezpiecznona lub bezpieczna
-*/
+//white lista
 const banksWhiteList = [
   "https://www.pkobp.pl",
   "https://www.pekao.pl",
@@ -75,40 +72,69 @@ const banksWhiteList = [
 
 ];
 
+//CZARNA LISTA
 
-
-// URL do pliku .txt
-//const CERT = 'https://hole.cert.pl/domains/v2/domains.txt';
+const CORS_PROXY = 'https://corsproxy.io/?url=';
+const CERT = 'http://hole.cert.pl/domains/v2/domains.txt';
 const BlackListCert = ["https://www.vlogdynia.pl/"];
 
-// Funkcja do pobrania i przetworzenia pliku
+
+// Funkcja do czarnej listy ze strony CERTU (domyślna)
 async function fetchBlackList() {
-    try {
-        // Pobierz plik
-        const response = await fetch('domains.txt');
-        
-        // Sprawdź, czy odpowiedź jest poprawna
-        if (!response.ok) {
-            throw new Error('Black list is not available now.');
+  try {
+    // Pobierz plik .txt
+    const response = await fetch(CORS_PROXY + CERT);
+
+    // Odczytaj zawartość pliku jako tekst
+    const text = await response.text();
+
+    // Podziel tekst na linie
+    const lines = text.split('\n');
+
+    // Dodaj każdy link do listy
+    lines.forEach(line => {
+        if (line.trim()) { // Sprawdź, czy linia nie jest pusta
+            BlackListCert.push(line.trim());
         }
-
-        // Przeczytaj tekst z odpowiedzi
-        const text = await response.text();
-
-        // Podziel tekst na wiersze
-        const lines = text.split('\n');
-
-        // Dodaj każdy wiersz do listy
-        lines.forEach(line => {
-            if (line.trim()) { // Sprawdź, czy wiersz nie jest pusty
-                BlackListCert.push(line.trim());
-            }
-        });
-    } catch (error) {
-        console.error('ERROR:', error);
-    }
+    });
+   // Zapisz czarną listę w pamięci lokalnej (do zamknięcia przeglądarki) - będzie to działało tak, że aktualizacje będą się wczytywały częściej
+   chrome.storage.local.set({ blacklist: BlackListCert });
+  } 
+  catch (error) {
+    loadLocalBlackList();
+  }
 }
 
+// Funkcja do czarnej listy lokalnej (w razie błędu)
+async function loadLocalBlackList() {
+  try {
+      // Pobierz plik
+      const response = await fetch('domains.txt');
+      
+      // Sprawdź, czy odpowiedź jest poprawna
+      if (!response.ok) {
+          throw new Error('Black list is not available now.');
+      }
+
+      // Przeczytaj tekst z odpowiedzi
+      const text = await response.text();
+
+      // Podziel tekst na wiersze
+      const lines = text.split('\n');
+
+      // Dodaj każdy wiersz do listy
+      lines.forEach(line => {
+          if (line.trim()) { // Sprawdź, czy wiersz nie jest pusty
+              BlackListCert.push(line.trim());
+          }
+      });
+  } catch (error) {
+      console.error('ERROR:', error);
+  }
+}
+
+
+// FUNKCJA GŁÓWNA - SPRAWDZANIE URL
 
   function checkUrl(url) {
     // Sprawdzenie, czy URL zaczyna się od któregoś z adresów bazowych
@@ -129,6 +155,10 @@ async function fetchBlackList() {
     }
   }
 
+  chrome.runtime.onInstalled.addListener(() => {
+    fetchBlackList();
+  });
+
   // Nasłuchiwanie na wiadomości z popup.js
   chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
     if (request.action === "checkUrl") {
@@ -137,12 +167,11 @@ async function fetchBlackList() {
     }
   });
 
-chrome.runtime.onInstalled.addListener(() => {
-  fetchBlackList();
-});
 
 // Nasłuchiwanie na zmiany w zakładkach
 chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
+  //nie działa: BlackListCert.length = 0; // czyszcznie listy, przed ponownym wczytaniem
+
   if (changeInfo.status === 'complete' && tab.url) {
     checkUrl(tab.url); // Automatyczne sprawdzanie URL po załadowaniu strony
   }
