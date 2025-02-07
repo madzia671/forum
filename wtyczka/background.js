@@ -114,7 +114,6 @@ async function fetchBlackList() {
     // Sprawdzenie, czy URL zaczyna się od któregoś z adresów bazowych
     const existsOnWhiteList = banksWhiteList.some(link=> url.startsWith(link));
     // Funkcja do sprawdzania, czy URL jest w bazie danych ////////////////
-    //const existsOnBlackList = BlackListCert.includes(url);
     const existsOnBlackList = BlackListCert.some(link=> url.includes(link));
     if(existsOnBlackList == true){
       chrome.action.setIcon({ path: "src/blackLOGO.png" });
@@ -142,17 +141,13 @@ chrome.runtime.onInstalled.addListener(() => {
   fetchBlackList();
 });
 
-
 // Nasłuchiwanie na zmiany w zakładkach
 chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
   if (changeInfo.status === 'complete' && tab.url) {
-      checkUrl(tab.url); // Automatyczne sprawdzanie URL po załadowaniu strony
+    checkUrl(tab.url); // Automatyczne sprawdzanie URL po załadowaniu strony
   }
 });
-/*
-chrome.runtime.onStartup.addListener(() => {
-  chrome.action.openPopup();
-});
-*/
+
+
 
 

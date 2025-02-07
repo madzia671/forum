@@ -3,7 +3,7 @@ DO zrobienia
 -> nie działa
 2. automatyczne otwieranie
 -> nie działa
-- zamysł: nie wyświetla się, gdy google, tylko jakaś witryna to najlepiej tylko zielone i czerwone witryny
+- zamysł: nie wyświetla się, gdy google, tylko jakaś witryna to najlepiej tylko zielone i czerwone witryny TAK
 3. zmiana języka
 - zamysł: pobiera jakieś cookies i wyświetla prawdopodobny język
 4. ma ładniejszy layout
@@ -12,9 +12,9 @@ DO zrobienia
 2 linia -> komunikat + zdjęcie do komunikatu i odpowiedni kolorek + zmiana tła i logo samej wtyczki + wymiarów może, że większe dla zagrożeń
 3 linia -> wyśrodkowany button FORUM z linkiem do forum, komunikat, że się przechodzi na nową stronę do forum
 
-+ gdy zmiana rozmiaru to za zmianą czcionki idzie też zmiana wymiarów
-+ na wstępie tylko ang i pol - dwie flagi
-+ tak samo tylko normal lub black - takie dwa półkola jakby
++ gdy zmiana rozmiaru to za zmianą czcionki idzie też zmiana wymiarów TAK
++ na wstępie tylko ang i pol - dwie flagi TAK
++ tak samo tylko normal lub black - takie dwa półkola jakby TAK
 
 - w ustawieniach można spersonalizować komunikat (tekst, czcionka, rozmiar, kolor) i dodać zdjęcie, zmienić język na dowolny
 - zobaczyć więcej szczegółów (że np. witryna w cert podana etc????) NIE SĄDZĘ
