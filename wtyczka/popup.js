@@ -57,9 +57,12 @@
         const currentUrl = tabs[0].url;
         chrome.runtime.sendMessage({ action: "checkUrl", url: currentUrl }, (response) => {
         const resultDiv = document.getElementById("result");
+        
+        // Resetowanie klas
+        document.body.classList.remove('good-body', 'dangerous-body', 'dark-mode', 'good-body-mode', 'dangerous-dark-mode');
 
         if (whichMode=='light'){
-            modeImage.src = 'src/dark.png'; 
+            modeImage.src = 'src/light.png'; 
             whichMode = 'dark';
             //main();
             if (response.result == "whiteList") {
@@ -74,7 +77,7 @@
         }}
 
         else {
-            modeImage.src = 'src/light.png'; 
+            modeImage.src = 'src/dark.png'; 
             whichMode = 'light';
             //main();
             if (response.result == "whiteList") {
