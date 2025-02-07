@@ -43,3 +43,50 @@ async function submitCommentWithCaptcha(e) {
         }
     });
 }
+
+document.addEventListener("DOMContentLoaded", () => {
+    const sections = document.querySelectorAll("section");
+
+    sections.forEach((section, index) => {
+        setTimeout(() => {
+            section.style.opacity = "1";
+            section.style.transform = "translateX(0)";
+        }, index * 300);
+    });
+});
+
+document.addEventListener("DOMContentLoaded", () => {
+    const paragraphs = document.querySelectorAll("header p");
+
+    paragraphs.forEach((p, index) => {
+        setTimeout(() => {
+            p.style.opacity = "1";
+            p.style.transform = "translateY(0)";
+            p.style.transition = "opacity 1.5s, transform 1.5s";
+        }, index * 300);
+    });
+});
+
+const themeToggleButton = document.getElementById('theme-toggle');
+
+// Sprawdzamy zapisany motyw w localStorage i ustawiamy go przy załadowaniu strony
+if (localStorage.getItem('theme') === 'dark') {
+    document.body.classList.add('dark-theme');
+    document.body.classList.remove('light-theme');
+} else {
+    document.body.classList.add('light-theme');
+    document.body.classList.remove('dark-theme');
+}
+
+// Po kliknięciu przycisku zmieniamy motyw i zapisujemy w localStorage
+themeToggleButton.addEventListener('click', () => {
+    document.body.classList.toggle('dark-theme');
+    document.body.classList.toggle('light-theme');
+
+    // Zapisujemy preferencję w localStorage
+    if (document.body.classList.contains('dark-theme')) {
+        localStorage.setItem('theme', 'dark');
+    } else {
+        localStorage.setItem('theme', 'light');
+    }
+});

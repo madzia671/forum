@@ -1,0 +1,254 @@
+body {
+    display: flex;
+    justify-content: center;
+    font-family: Georgia, sans-serif; 
+    margin: 0;
+    padding: 0;
+    background-color: white;
+    color: black; 
+    transition: background-color 0.3s, color 0.3s;
+    width: 400px; 
+    min-width: 200px; 
+    height: auto;
+    min-height: 200px; 
+    overflow: auto; /* Umożliwia przewijanie */
+    border: 2px solid black;
+    font-size: 16px;
+    border-radius: 50px;
+}
+
+.good-body {
+    display: flex;
+    justify-content: center;
+    font-family: Georgia, sans-serif; 
+    margin: 0;
+    padding: 0;
+    background-color: #b4ecba;
+    color: black; 
+    transition: background-color 0.3s, color 0.3s;
+    width: 400px; 
+    min-width: 200px; 
+    height: auto;
+    min-height: 200px; 
+    overflow: auto; /* Umożliwia przewijanie */
+    border: 2px solid black;
+    /*border-radius: 15px;*/
+}
+
+.dangerous-body
+{
+    display: flex;
+    justify-content: center;
+    font-family: Arial, sans-serif; 
+    font-size: 26px;
+    margin: 0;
+    padding: 0;
+    background-color: #b05d5d;
+    color: rgb(255, 225, 0); 
+    width: 600px; /* Zwiększ szerokość */
+    min-width: 400px; /* Możesz to zostawić */
+    height: auto; /* Ustaw na auto */
+    min-height: 200px; /* Ustaw minimalną wysokość */
+    overflow: auto; /* Umożliwia przewijanie */
+}
+.container {
+    display: flex;
+    flex-direction: column;
+    overflow: auto; /* Umożliwia przewijanie */
+    align-items: center;
+    justify-content: center;
+}
+
+#project-name{
+    padding: 3px;
+    font-size: 18px;
+}
+
+.dark-mode {
+    background-color: #121212;
+    color: #ffffff;
+}
+
+.dangerous-dark-mode{
+    display: flex;
+    justify-content: center;
+    font-family: Arial, sans-serif; 
+    font-size: 26px;
+    margin: 0;
+    padding: 0;
+    background-color: #4a1e1e;
+    color: rgb(255, 238, 0); 
+    width: 600px; /* Zwiększ szerokość */
+    min-width: 400px; /* Możesz to zostawić */
+    height: auto; /* Ustaw na auto */
+    min-height: 200px; /* Ustaw minimalną wysokość */
+    overflow: auto; /* Umożliwia przewijanie */
+}
+
+.good-body-mode{
+    display: flex;
+    justify-content: center;
+    font-family: Georgia, sans-serif; 
+    margin: 0;
+    padding: 0;
+    background-color: #053d0f;
+    color: rgb(207, 194, 194); 
+    transition: background-color 0.3s, color 0.3s;
+    width: 400px; 
+    min-width: 200px; 
+    height: auto;
+    min-height: 200px; 
+    overflow: auto; /* Umożliwia przewijanie */
+    border: 2px solid black;
+    /*border-radius: 15px;*/
+}
+
+
+.maintext {
+    display: inline-flex;
+    align-items: center;
+}
+
+img
+{
+    width: 32px;
+}
+
+.box {
+    margin: 5px; /* Dodanie marginesu dla lepszego wyglądu */
+}
+   
+#zoom-in, #reduce, #resetZoom {
+    background-color: rgb(197, 173, 230); /* Ustawia kolor tła */
+    color: rgb(65, 0, 139); /* Ustawia kolor tekstu */
+    padding: 2px; /* Dodaje wewnętrzny odstęp */
+    border: 2px solid rgb(65, 0, 139); /* Dodaje ramkę */
+    border-radius: 5px; /* Zaokrągla rogi */
+    width: 20px;
+    height: 20px;
+    font-family: Arial, sans-serif;
+    font-size: 16px;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+    display: flex;
+    /*font-size: 20px;  Ustawia rozmiar czcionki */
+}
+
+.mainbox {
+    padding-bottom: 6px;
+    align-items: center;
+    text-align: center;
+    font-family: Arial, sans-serif; 
+   /* font-size: 16px;*/
+}
+
+.forumbox {
+    padding-bottom: 0px;
+    padding-top: 15px;
+    align-items: center;
+    text-align: center;
+}
+
+#check-forum
+{
+    background-color: #bb86fc;
+    font-family: Arial, sans-serif; 
+    font-weight: bold;
+    color: black; 
+    border: 1px solid black;
+    border-radius: 3px;
+}
+/*
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 20px;
+    text-align: center;
+}
+
+h1 {
+    color: #333;
+}
+
+button {
+    background-color: #555;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #777;
+}
+
+
+
+body {
+    font-family: Arial, sans-serif; // Ustawienie czcionki 
+    margin: 0;
+    padding: 0;
+    background-color: #f9f9f9; // Tło strony 
+}
+
+.mainbox {
+    border: 2px solid black; /* Czarne obramowanie 
+    padding: 20px; /* Wewnętrzne odstępy 
+    margin: 20px auto; /* Wyśrodkowanie 
+    max-width: 800px; /* Maksymalna szerokość 
+    background-color: white; /* Tło mainbox 
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Cień 
+    display: flex; /* Umożliwienie elastycznego układu 
+    flex-direction: column; /* Ustawienie elementów w kolumnie 
+}
+
+.maintext {
+    display: flex; /* Umożliwienie elastycznego układu 
+    align-items: center; /* Wyśrodkowanie w pionie 
+    margin-bottom: 20px; /* Odstęp poniżej 
+}
+
+
+.image {
+    max-width: 50px; /* Szerokość obrazka 
+    height: auto; /* Automatyczna wysokość
+    margin-right: 10px; /* Odstęp między obrazkiem a tekstem 
+}
+
+.title {
+    margin: 0; /* Usunięcie domyślnych marginesów 
+}
+
+.boxes {
+    display: flex; /* Umożliwienie elastycznego układu dla boxów 
+    justify-content: space-between; /* Rozmieszczenie boxów w równych odstępach 
+    width: 100%; /* Szerokość kontenera boxów 
+}
+
+.box {
+    background-color: #e0e0e0; /* Tło dla boxów 
+    border: 1px solid #ccc; /* Ramka dla boxów 
+    border-radius: 5px; /* Zaokrąglenie rogów 
+    padding: 10px; /* Wewnętrzne odstępy 
+    flex: 1; /* Umożliwienie elastycznego rozkładu 
+    margin: 0 5px; /* Odstęp między boxami 
+    text-align: center; /* Wyśrodkowanie tekstu w boxach 
+}
+
+.forumbox {
+    text-align: center; /* Wyśrodkowanie tekstu w forumbox/
+    margin-top: 20px; /* Odstęp powyżej 
+}
+
+.forum-button {
+    padding: 10px 20px; /* Wewnętrzne odstępy przycisku 
+    font-size: 16px; /* Rozmiar czcionki 
+    cursor: pointer; /* Zmiana kursora na wskaźnik 
+    background-color: #007bff; /* Kolor tła przycisku 
+    color: white; /* Kolor tekstu przycisku 
+    border: none; /* Bez obramowania 
+}
+
+*/
