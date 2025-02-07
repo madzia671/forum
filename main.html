@@ -6,6 +6,9 @@
     <title>Strona z Forum</title>
     <link rel="stylesheet" href="style.css">
     <script src="https://www.google.com/recaptcha/enterprise.js?render=6LedrLsqAAAAALrmqr-se8iWDJ60gxFpTvk8Egbr"></script>
+    <link rel="icon" type="image/png" href="48x48.png" sizes="32x32">
+    <link rel="icon" type="image/png" href="16x16.png" sizes="16x16">
+    <link rel="shortcut icon" href="favicon.ico">
 </head>
 <body>
     <header>
@@ -14,9 +17,9 @@
     </header>
     <nav>
         <a href="main.html">Strona Główna</a>
-        <a href="index.php">Forum</a>
+        <a href="index.html">Forum</a>
         <a href="about.html">O Nas</a>
-        <a href="galery.html">Galeria zdjęć</a>
+        <a href="tuto.html">Tutorial</a>
         <a href="info.html">O wtyczce</a>
         <a href="for.html">Dla kogo?</a>
         <button id="theme-toggle">Zmień motyw</button>
@@ -35,7 +38,11 @@
             <h2>Wypróbuj</h2>
             <p>Skorzystaj z naszej wtyczki, aby jeszcze łatwiej korzystać z funkcji strony.</p>
             <button>Pobierz wtyczkę</button>
-        </section>
+            <script>
+                document.getElementById("download-btn").addEventListener("click", function() {
+                    window.location.href = "wtyczka.zip";
+                });
+            </script>        </section>
     </main>
     <footer>
         <p>&copy; 2025 CERBERSECURITY. Wszelkie prawa zastrzeżone.</p>
